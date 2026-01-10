@@ -1,0 +1,139 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>me.mintytc</groupId>
+        <artifactId>AzAPI-parent</artifactId> <!-- MUST point to parent POM -->
+        <version>1.0.0-R0.1-BASE</version>
+        <relativePath>../pom.xml</relativePath> <!-- points to folder with parent pom.xml -->
+    </parent>
+
+    <artifactId>main</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- core library -->
+        <dependency>
+            <groupId>me.mintytc</groupId>
+            <artifactId>azapi-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Spigot API 1.8.8 is provided for compilation (plugin loads on any version) -->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JetBrains annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>26.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>me.mintytc</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0.0-R0.1-BASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.mintytc</groupId>
+            <artifactId>v1_16</artifactId>
+            <version>1.0.0-R0.1-BASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.mintytc</groupId>
+            <artifactId>v1_13</artifactId>
+            <version>1.0.0-R0.1-BASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.mintytc</groupId>
+            <artifactId>v1_8</artifactId>
+            <version>1.0.0-R0.1-BASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Delete old jars before building -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete>
+                                    <fileset dir="C:\Programming\Servers\azalium\plugins">
+                                        <include name="AzAPI-*.jar"/>
+                                    </fileset>
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Shade plugin to output final jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>me.mintytc</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <outputDirectory>C:\Programming\Servers\azalium\plugins</outputDirectory>
+                            <finalName>AzAPI-${project.version}</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>

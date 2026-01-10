@@ -1,0 +1,19 @@
+name: AzAPI
+version: '${project.version}'
+main: me.mintytc.azapi.plugin.AzAPI
+api-version: '1.13'
+authors: [ mintytc ]
+description: A developer’s trusted toolkit, a player’s smooth experience, and a server’s quiet powerhouse.
+load: STARTUP
+
+commands:
+  azapi:
+    usage:
+    description:
+
+permissions:
+  azapi:
+    default: op
+    children:
+      updates:
+        default: op
