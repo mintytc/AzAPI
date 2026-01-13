@@ -12,7 +12,8 @@
     <packaging>jar</packaging>
 
     <name>AzAPI</name>
-    <description>A developer’s trusted toolkit, a player’s smooth experience, and a server’s quiet powerhouse.
+    <description>A developer’s trusted toolkit, a player’s smooth experience, and a server’s quiet
+        powerhouse.
     </description>
 
     <properties>
